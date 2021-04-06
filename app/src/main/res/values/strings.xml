@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BankingDetails</string>
+    <string name="bank_name">Bank Name: </string>
+    <string name="ifsc">IFSC: </string>
+</resources>

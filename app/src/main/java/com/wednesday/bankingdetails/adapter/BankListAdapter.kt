@@ -1,0 +1,41 @@
+package com.wednesday.bankingdetails.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.wednesday.bankingdetails.R
+import com.wednesday.bankingdetails.model.Bank
+
+class BankListAdapter(val context: Context, var bankDataSource: ArrayList<Bank>) :
+    RecyclerView.Adapter<BankListAdapter.ViewHolder>() {
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val txtBankName: TextView = itemView.findViewById(R.id.txtBankName)
+        val txtIfsCode: TextView = itemView.findViewById(R.id.txtIfsCode)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.bank_row_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return if (bankDataSource.isNotEmpty()) bankDataSource.size else 0
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val bank = bankDataSource[position]
+        holder.txtBankName.text = "${context.getString(R.string.bank_name)} ${bank.bankName}"
+        holder.txtIfsCode.text = "${context.getString(R.string.ifsc)} ${bank.ifsCode}"
+    }
+
+    fun resetDataSource(bank: List<Bank>) {
+        bankDataSource.clear()
+        bankDataSource.addAll(bank)
+        notifyDataSetChanged()
+    }
+}
