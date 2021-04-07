@@ -11,7 +11,7 @@ import com.wednesday.bankingdetails.utility.Utils
 import java.util.*
 
 class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
-    RecyclerView.Adapter<BankListAdapter.ViewHolder>() {
+        RecyclerView.Adapter<BankListAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txtBankName: TextView = itemView.findViewById(R.id.txtBankName)
@@ -20,7 +20,7 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.row_item_bank, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.row_item_bank, parent, false)
         return ViewHolder(view)
     }
 
@@ -35,7 +35,7 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
         val ifsc = "${holder.itemView.resources.getString(R.string.ifsc)}: ${bank.ifsCode}"
         holder.txtBankName.text = Utils.capitalizeFirstLetter(name)
         holder.txtIfsCode.text = ifsc.toUpperCase(
-            Locale.getDefault()
+                Locale.getDefault()
         )
     }
 

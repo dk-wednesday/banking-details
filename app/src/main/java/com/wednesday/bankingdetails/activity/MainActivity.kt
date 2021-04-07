@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bankListAdapter: BankListAdapter
-        val bankList: ArrayList<Bank> = Bank.addBanks()
+        val bankList: ArrayList<Bank> = Bank.createMockBanks()
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
 
@@ -25,10 +25,10 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = linearLayoutManager
 
         recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this@MainActivity,
-                LinearLayoutManager.VERTICAL
-            )
+                DividerItemDecoration(
+                        this@MainActivity,
+                        LinearLayoutManager.VERTICAL
+                )
         )
 
         bankListAdapter = BankListAdapter(bankList)

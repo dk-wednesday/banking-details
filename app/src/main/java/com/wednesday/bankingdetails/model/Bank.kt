@@ -2,7 +2,7 @@ package com.wednesday.bankingdetails.model
 
 class Bank(val bankName: String, var ifsCode: String) {
     companion object {
-        fun addBanks(): ArrayList<Bank> {
+        fun createMockBanks(): ArrayList<Bank> {
             val bankList = ArrayList<Bank>()
 
             var bank = Bank("HDFC Bank", "HDFC0000181")
