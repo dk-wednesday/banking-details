@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wednesday.bankingdetails.R
 import com.wednesday.bankingdetails.adapter.BankListAdapter
 import com.wednesday.bankingdetails.model.Bank
+import com.wednesday.bankingdetails.model.BankFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bankListAdapter: BankListAdapter
-        val bankList: ArrayList<Bank> = Bank.createMockBanks()
+        val bankList: ArrayList<Bank> = BankFactory.getMockBanks()
 
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
