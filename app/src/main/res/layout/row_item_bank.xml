@@ -10,26 +10,45 @@
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginEnd="@dimen/eight_dp"
         android:layout_weight="1"
         android:text="@string/bank_name"
         android:textAppearance="@style/Heading"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imgStar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="@dimen/eight_dp" />
 
     <TextView
         android:id="@+id/txtIfsCode"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginEnd="@dimen/eight_dp"
         android:layout_marginTop="@dimen/eight_dp"
         android:layout_weight="1"
         android:text="@string/ifsc"
         android:textAppearance="@style/Details"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imgStar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBankName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBankName"
+        android:layout_marginRight="@dimen/eight_dp" />
+
+    <ImageView
+        android:id="@+id/imgStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="@dimen/eight_dp"
+        android:layout_marginEnd="@dimen/eight_dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:src="@drawable/ic_baseline_star_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

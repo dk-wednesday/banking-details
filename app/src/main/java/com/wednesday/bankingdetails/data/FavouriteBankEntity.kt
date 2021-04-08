@@ -6,10 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favourite_banks")
 data class FavouriteBankEntity(
-    @PrimaryKey(autoGenerate = true)
-    var fav_bank_id: Int,
-
-    @ColumnInfo(name = "bank_name") var bankName: String,
-    @ColumnInfo(name = "ifs_code") var ifsc: String
+    @PrimaryKey var ifsc: String,
+    @ColumnInfo(name = "bank_name") var bankName: String
 
 )

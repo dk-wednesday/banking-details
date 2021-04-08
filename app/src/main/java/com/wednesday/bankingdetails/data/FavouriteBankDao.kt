@@ -7,7 +7,7 @@ interface FavouriteBankDao {
     @Query("SELECT * FROM favourite_banks")
     fun getAll(): List<FavouriteBankEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(favouriteBankEntity: FavouriteBankEntity)
 
     @Delete

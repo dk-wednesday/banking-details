@@ -1,32 +1,38 @@
 package com.wednesday.bankingdetails.model
 
+import android.content.Context
+import androidx.room.Room
+import com.wednesday.bankingdetails.data.FavouritesDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 class BankFactory {
 
     companion object {
-        fun getMockBanks(): ArrayList<Bank> {
+        fun getMockBanks(context: Context): ArrayList<Bank> {
             val bankList = ArrayList<Bank>()
 
-            var bank = Bank("HDFC Bank", "HDFC0000181")
+            var bank = Bank("HDFC Bank", "HDFC0000181", false)
             bankList.add(bank)
-            bank = Bank("ICICI Bank", "ICIC0000379")
+            bank = Bank("ICICI Bank", "ICIC0000379", false)
             bankList.add(bank)
-            bank = Bank("Yes Bank", "YESB0000100")
+            bank = Bank("Yes Bank", "YESB0000100", false)
             bankList.add(bank)
-            bank = Bank("Bank of Maharashtra", "MAHB0000937")
+            bank = Bank("Bank of Maharashtra", "MAHB0000937", false)
             bankList.add(bank)
-            bank = Bank("IDBI Bank", "IBKL0002051")
+            bank = Bank("IDBI Bank", "IBKL0002051", false)
             bankList.add(bank)
-            bank = Bank("Bank of Baroda", "BARB0AHMEDN")
+            bank = Bank("Bank of Baroda", "BARB0AHMEDN", false)
             bankList.add(bank)
-            bank = Bank("Axis Bank", "UTIB0000215")
+            bank = Bank("Axis Bank", "UTIB0000215", false)
             bankList.add(bank)
-            bank = Bank("Bandhan Bank", "BDBL0001940")
+            bank = Bank("Bandhan Bank", "BDBL0001940", false)
             bankList.add(bank)
-            bank = Bank("Federal Bank", "FDRL0001588")
+            bank = Bank("Federal Bank", "FDRL0001588", false)
             bankList.add(bank)
-            bank = Bank("Kotak Mahindra Bank", "KKBK0002035")
+            bank = Bank("Kotak Mahindra Bank", "KKBK0002035", false)
             bankList.add(bank)
-            bank = Bank("State Bank of India", "SBIN0021748")
+            bank = Bank("State Bank of India", "SBIN0021748", false)
             bankList.add(bank)
 
             return bankList

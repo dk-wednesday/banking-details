@@ -11,6 +11,10 @@ import com.wednesday.bankingdetails.data.FavouritesDatabase
 import com.wednesday.bankingdetails.model.Bank
 import com.wednesday.bankingdetails.model.BankFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,10 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val db = Room.databaseBuilder(applicationContext, FavouritesDatabase::class.java, "favourite-list.db").build()
-
-        val bankListAdapter: BankListAdapter
-        val bankList: ArrayList<Bank> = BankFactory.getMockBanks()
+        var bankListAdapter: BankListAdapter
+        val bankList: ArrayList<Bank> = BankFactory.getMockBanks(this)
 
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
@@ -34,8 +36,22 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        bankListAdapter = BankListAdapter(bankList)
-        recyclerView.adapter = bankListAdapter
+
+        val bankDatabase = FavouritesDatabase.getDatabase(this)
+
+        GlobalScope.launch {
+            val data = bankDatabase?.favouriteBankDao()?.getAll()
+
+            data?.forEach {
+                bankList.find { bank -> bank.ifsCode == it.ifsc }!!.isFavourite = true
+            }
+
+            withContext(Dispatchers.Main){
+                bankListAdapter = BankListAdapter(bankList)
+                recyclerView.adapter = bankListAdapter
+
+            }
+        }
 
     }
 }

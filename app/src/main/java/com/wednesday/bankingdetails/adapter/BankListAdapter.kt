@@ -5,9 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.bankingdetails.R
+import com.wednesday.bankingdetails.data.FavouriteBankEntity
+import com.wednesday.bankingdetails.data.FavouritesDatabase
 import com.wednesday.bankingdetails.model.Bank
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_bank.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
@@ -28,6 +32,35 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
             itemView.txtIfsCode.text = ifsc.toUpperCase(
                 Locale.getDefault()
             )
+            if (bank.isFavourite){
+                itemView.imgStar.visibility = View.VISIBLE
+            }else{
+                itemView.imgStar.visibility = View.GONE
+            }
+
+
+            val bankDatabase = FavouritesDatabase.getDatabase(itemView.context)
+
+            itemView.setOnClickListener {
+                bank.isFavourite = !bank.isFavourite
+                if (bank.isFavourite){
+                    itemView.imgStar.visibility = View.VISIBLE
+
+                    GlobalScope.launch {
+                        val favouriteBankEntity = FavouriteBankEntity(bank.ifsCode, bank.bankName)
+                        bankDatabase?.favouriteBankDao()?.insert(favouriteBankEntity)
+                    }
+
+                }else{
+                    itemView.imgStar.visibility = View.GONE
+
+                    GlobalScope.launch {
+                        val favouriteBankEntity = FavouriteBankEntity(bank.ifsCode, bank.bankName)
+                        bankDatabase?.favouriteBankDao()?.delete(favouriteBankEntity)
+                    }
+
+                }
+            }
         }
     }
 
