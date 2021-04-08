@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.bankingdetails.R
-import com.wednesday.bankingdetails.extensions.capitalizeFirstLetter
 import com.wednesday.bankingdetails.data.FavouriteBankEntity
 import com.wednesday.bankingdetails.data.FavouritesDatabase
+import com.wednesday.bankingdetails.extensions.capitalizeFirstLetter
 import com.wednesday.bankingdetails.model.Bank
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_bank.view.*
@@ -29,9 +29,9 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
             itemView.txtIfsCode.text = ifsc.toUpperCase(
                 Locale.getDefault()
             )
-            if (bank.isFavourite){
+            if (bank.isFavourite) {
                 itemView.imgStar.visibility = View.VISIBLE
-            }else{
+            } else {
                 itemView.imgStar.visibility = View.GONE
             }
 
@@ -40,7 +40,7 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
 
             itemView.setOnClickListener {
                 bank.isFavourite = !bank.isFavourite
-                if (bank.isFavourite){
+                if (bank.isFavourite) {
                     itemView.imgStar.visibility = View.VISIBLE
 
                     GlobalScope.launch {
@@ -48,7 +48,7 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
                         bankDatabase?.favouriteBankDao()?.insert(favouriteBankEntity)
                     }
 
-                }else{
+                } else {
                     itemView.imgStar.visibility = View.GONE
 
                     GlobalScope.launch {

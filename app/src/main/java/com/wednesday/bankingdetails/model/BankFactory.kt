@@ -1,10 +1,6 @@
 package com.wednesday.bankingdetails.model
 
 import android.content.Context
-import androidx.room.Room
-import com.wednesday.bankingdetails.data.FavouritesDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class BankFactory {
 

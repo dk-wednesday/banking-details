@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.wednesday.bankingdetails.R
 import com.wednesday.bankingdetails.adapter.BankListAdapter
 import com.wednesday.bankingdetails.data.FavouritesDatabase
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 bankList.find { bank -> bank.ifsCode == it.ifsc }!!.isFavourite = true
             }
 
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 bankListAdapter = BankListAdapter(bankList)
                 recyclerView.adapter = bankListAdapter
 

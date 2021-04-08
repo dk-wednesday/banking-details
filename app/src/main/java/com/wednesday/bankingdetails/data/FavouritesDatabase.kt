@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [FavouriteBankEntity::class], version = 1)
 abstract class FavouritesDatabase : RoomDatabase() {
 
-    abstract fun favouriteBankDao() : FavouriteBankDao
+    abstract fun favouriteBankDao(): FavouriteBankDao
 
     companion object {
         private var INSTANCE: FavouritesDatabase? = null
