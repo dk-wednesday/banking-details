@@ -4,25 +4,24 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.wednesday.bankingdetails.model.Bank
 
-@Database(entities = [FavouriteBankEntity::class], version = 1)
+@Database(entities = [Bank::class], version = 1)
 abstract class FavouritesDatabase : RoomDatabase() {
 
     abstract fun favouriteBankDao(): FavouriteBankDao
 
     companion object {
-        private var INSTANCE: FavouritesDatabase? = null
+        private lateinit var INSTANCE: FavouritesDatabase
 
-        fun getDatabase(context: Context): FavouritesDatabase? {
-            if (INSTANCE == null) {
-                synchronized(FavouritesDatabase::class)
-                {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        FavouritesDatabase::class.java,
-                        "favourite-list.db"
-                    ).build()
-                }
+        fun getDatabase(context: Context): FavouritesDatabase {
+            synchronized(FavouritesDatabase::class)
+            {
+                INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    FavouritesDatabase::class.java,
+                    "favourite-list.db"
+                ).build()
             }
 
             return INSTANCE

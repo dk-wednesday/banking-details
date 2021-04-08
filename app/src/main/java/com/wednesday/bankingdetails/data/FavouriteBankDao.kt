@@ -1,16 +1,17 @@
 package com.wednesday.bankingdetails.data
 
 import androidx.room.*
+import com.wednesday.bankingdetails.model.Bank
 
 @Dao
 interface FavouriteBankDao {
     @Query("SELECT * FROM favourite_banks")
-    fun getAll(): List<FavouriteBankEntity>
+    fun getAll(): List<Bank>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(favouriteBankEntity: FavouriteBankEntity)
+    fun insert(bank: Bank)
 
     @Delete
-    fun delete(favouriteBankEntity: FavouriteBankEntity)
+    fun delete(bank: Bank)
 
 }

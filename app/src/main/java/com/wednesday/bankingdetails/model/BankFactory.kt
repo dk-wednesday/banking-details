@@ -1,34 +1,32 @@
 package com.wednesday.bankingdetails.model
 
-import android.content.Context
-
 class BankFactory {
 
     companion object {
-        fun getMockBanks(context: Context): ArrayList<Bank> {
+        fun getMockBanks(): ArrayList<Bank> {
             val bankList = ArrayList<Bank>()
 
-            var bank = Bank("HDFC Bank", "HDFC0000181", false)
+            var bank = Bank("HDFC0000181", "HDFC Bank", false)
             bankList.add(bank)
-            bank = Bank("ICICI Bank", "ICIC0000379", false)
+            bank = Bank("ICIC0000379", "ICICI Bank", false)
             bankList.add(bank)
-            bank = Bank("Yes Bank", "YESB0000100", false)
+            bank = Bank("YESB0000100", "Yes Bank", false)
             bankList.add(bank)
-            bank = Bank("Bank of Maharashtra", "MAHB0000937", false)
+            bank = Bank("MAHB0000937", "Bank of Maharashtra", false)
             bankList.add(bank)
-            bank = Bank("IDBI Bank", "IBKL0002051", false)
+            bank = Bank("IBKL0002051", "IDBI Bank", false)
             bankList.add(bank)
-            bank = Bank("Bank of Baroda", "BARB0AHMEDN", false)
+            bank = Bank("BARB0AHMEDN", "Bank of Baroda", false)
             bankList.add(bank)
-            bank = Bank("Axis Bank", "UTIB0000215", false)
+            bank = Bank("UTIB0000215", "Axis Bank", false)
             bankList.add(bank)
-            bank = Bank("Bandhan Bank", "BDBL0001940", false)
+            bank = Bank("BDBL0001940", "Bandhan Bank", false)
             bankList.add(bank)
-            bank = Bank("Federal Bank", "FDRL0001588", false)
+            bank = Bank("FDRL0001588", "Federal Bank", false)
             bankList.add(bank)
-            bank = Bank("Kotak Mahindra Bank", "KKBK0002035", false)
+            bank = Bank("KKBK0002035", "Kotak Mahindra Bank", false)
             bankList.add(bank)
-            bank = Bank("State Bank of India", "SBIN0021748", false)
+            bank = Bank("SBIN0021748", "State Bank of India", false)
             bankList.add(bank)
 
             return bankList
