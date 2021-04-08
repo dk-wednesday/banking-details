@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.bankingdetails.R
 import com.wednesday.bankingdetails.adapter.BankListAdapter
 import com.wednesday.bankingdetails.model.Bank
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,16 +19,14 @@ class MainActivity : AppCompatActivity() {
         val bankListAdapter: BankListAdapter
         val bankList: ArrayList<Bank> = Bank.createMockBanks()
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
 
         recyclerView.addItemDecoration(
-                DividerItemDecoration(
-                        this@MainActivity,
-                        LinearLayoutManager.VERTICAL
-                )
+            DividerItemDecoration(
+                this@MainActivity,
+                LinearLayoutManager.VERTICAL
+            )
         )
 
         bankListAdapter = BankListAdapter(bankList)
