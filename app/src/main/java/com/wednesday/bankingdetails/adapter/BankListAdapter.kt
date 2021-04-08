@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.bankingdetails.R
+import com.wednesday.bankingdetails.extensions.capitalizeFirstLetter
 import com.wednesday.bankingdetails.model.Bank
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_bank.view.*
@@ -15,10 +16,6 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
-
-        private fun String.capitalizeFirstLetter(): String =
-            this.split(" ").joinToString(" ") { it.capitalize(Locale.getDefault()) }
-                .trimEnd()
 
         fun bind(bank: Bank) {
             val name =
