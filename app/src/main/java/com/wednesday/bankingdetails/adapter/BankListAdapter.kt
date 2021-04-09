@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.bankingdetails.R
+import com.wednesday.bankingdetails.activity.MainActivity
 import com.wednesday.bankingdetails.extensions.capitalizeFirstLetter
 import com.wednesday.bankingdetails.model.Bank
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_bank.view.*
 import java.util.*
 
-class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
+class BankListAdapter(private val bankDataSource: ArrayList<Bank>) :
     RecyclerView.Adapter<BankListAdapter.ViewHolder>() {
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
@@ -20,11 +21,26 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
         fun bind(bank: Bank) {
             val name =
                 "${itemView.resources.getString(R.string.bank_name)}: ${bank.bankName}"
-            val ifsc = "${itemView.resources.getString(R.string.ifsc)}: ${bank.ifsCode}"
+            val ifsc = "${itemView.resources.getString(R.string.ifsc)}: ${bank.ifsc}"
             itemView.txtBankName.text = name.capitalizeFirstLetter()
             itemView.txtIfsCode.text = ifsc.toUpperCase(
                 Locale.getDefault()
             )
+            if (bank.isFavourite) {
+                itemView.imgStar.visibility = View.VISIBLE
+            } else {
+                itemView.imgStar.visibility = View.GONE
+            }
+
+            itemView.imgStar.visibility = if (bank.isFavourite) View.VISIBLE else View.GONE
+
+            itemView.setOnClickListener {
+                bank.isFavourite = !bank.isFavourite
+                if (bank.isFavourite) (itemView.context as MainActivity).favouriteBank(bank) else (itemView.context as MainActivity).unFavouriteBank(
+                    bank
+                )
+
+            }
         }
     }
 
@@ -43,9 +59,13 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
         holder.bind(bank)
     }
 
-    fun resetDataSource(bank: List<Bank>) {
-        bankDataSource.clear()
-        bankDataSource.addAll(bank)
-        notifyDataSetChanged()
+    fun resetDataSource(bankDataSource: ArrayList<Bank>) {
+        this.bankDataSource.clear()
+        this.bankDataSource.addAll(bankDataSource)
+        this.notifyDataSetChanged()
+    }
+
+    fun refreshData() {
+        this.notifyDataSetChanged()
     }
 }
