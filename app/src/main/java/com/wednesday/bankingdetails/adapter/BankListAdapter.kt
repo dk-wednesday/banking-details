@@ -12,7 +12,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_bank.view.*
 import java.util.*
 
-class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
+class BankListAdapter(private val bankDataSource: ArrayList<Bank>) :
     RecyclerView.Adapter<BankListAdapter.ViewHolder>() {
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
@@ -35,8 +35,8 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
             itemView.imgStar.visibility = if (bank.isFavourite) View.VISIBLE else View.GONE
 
             itemView.setOnClickListener {
-
-                if (bank.isFavourite) (itemView.context as MainActivity).unFavouriteBank(bank) else (itemView.context as MainActivity).favouriteBank(
+                bank.isFavourite = !bank.isFavourite
+                if (bank.isFavourite) (itemView.context as MainActivity).favouriteBank(bank) else (itemView.context as MainActivity).unFavouriteBank(
                     bank
                 )
 
@@ -59,9 +59,13 @@ class BankListAdapter(var bankDataSource: ArrayList<Bank>) :
         holder.bind(bank)
     }
 
-    fun resetDataSource(bank: ArrayList<Bank>) {
-        bankDataSource.clear()
-        bankDataSource.addAll(bank)
-        notifyDataSetChanged()
+    fun resetDataSource(bankDataSource: ArrayList<Bank>) {
+        this.bankDataSource.clear()
+        this.bankDataSource.addAll(bankDataSource)
+        this.notifyDataSetChanged()
+    }
+
+    fun refreshData() {
+        this.notifyDataSetChanged()
     }
 }

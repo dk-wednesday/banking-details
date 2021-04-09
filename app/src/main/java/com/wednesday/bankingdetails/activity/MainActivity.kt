@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), BankFavouriteListener {
         BankFactory.getMockBanks()
     }
     private val bankListAdapter: BankListAdapter by lazy {
-        initAdapter()
+        BankListAdapter(bankList)
     }
     private val bankDatabase: FavouritesDatabase by lazy {
         FavouritesDatabase.getDatabase(this)
@@ -44,26 +44,19 @@ class MainActivity : AppCompatActivity(), BankFavouriteListener {
             )
         )
 
-        getFavouriteBanks()
+        bindFavouriteBanks()
     }
 
-    private fun initAdapter(): BankListAdapter {
-        return BankListAdapter(bankList)
-    }
-
-    private fun getFavouriteBanks() {
+    private fun bindFavouriteBanks() {
         GlobalScope.launch {
-            bankList.clear()
-            bankList.addAll(BankFactory.getMockBanks())
-
             val data = bankDatabase.favouriteBankDao().getAll()
 
             data.forEach {
-                bankList.find { bank -> bank.ifsc == it.ifsc }!!.isFavourite = true
+                bankList.find { bank -> bank.ifsc == it.ifsc }?.let { it.isFavourite = true }
             }
 
             withContext(Dispatchers.Main) {
-                bankListAdapter.notifyDataSetChanged()
+                bankListAdapter.refreshData()
             }
         }
     }
@@ -71,7 +64,7 @@ class MainActivity : AppCompatActivity(), BankFavouriteListener {
     override fun favouriteBank(bank: Bank) {
         GlobalScope.launch {
             bankDatabase.favouriteBankDao().insert(bank)
-            getFavouriteBanks()
+            bindFavouriteBanks()
 
         }
     }
@@ -79,7 +72,7 @@ class MainActivity : AppCompatActivity(), BankFavouriteListener {
     override fun unFavouriteBank(bank: Bank) {
         GlobalScope.launch {
             bankDatabase.favouriteBankDao().delete(bank)
-            getFavouriteBanks()
+            bindFavouriteBanks()
         }
 
     }
